@@ -1,6 +1,5 @@
 includes.js - Client Side HTML Includes
 ===========
-# Usage
 This script allows you to use HTML includes without any server-side solution. It needs for creating of huge single-page applications and for further compilation using [grunt-includes](https://github.com/vanetix/grunt-includes) or similar compiling system. The script supports multi-level includes and catches recursive links (10k links restriction). **includes** function doesn't break event listeners because it uses **insertAdjacentHTML** for replacing include text.
 
 ```js
