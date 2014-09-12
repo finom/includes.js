@@ -8,9 +8,9 @@ includes(options);
 ```
 
 ## Options
-``pattern`` (String|Regexp) - uses for matching and replacing include text (``{{include "FILE_NAME"}}`` by default).
-``path`` (String) - Indicates the path to use when looking for included files.
-``suffix`` (String) - Append the defined string to each included filename before reading them.
+- ``pattern`` (String|Regexp) - uses for matching and replacing include text (``{{include "FILE_NAME"}}`` by default).
+- ``path`` (String) - Indicates the path to use when looking for included files.
+- ``suffix`` (String) - Append the defined string to each included filename before reading them.
 
 ## Example
 ```html
