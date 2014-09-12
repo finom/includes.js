@@ -17,16 +17,16 @@
 				.replace( 'FILE_NAME', '(\\S+)' ) ) 
 			: pattern;
 
-		all = doc.querySelectorAll( '*' );
+		all = document.querySelectorAll( '*' );
 		for( i = 0; i < all.length; i++ ) {
 			allItem = all[ i ];
-			if( allItem.tagName === 'SCRIPT' ) continue;
+			if( allItem.tagName == 'SCRIPT' ) continue;
 			childNodes = allItem.childNodes;
 			for( j = 0; j < childNodes.length; j++ ) {
 				node = childNodes[ j ];
 
 				if( node.nodeType === 3 && pattern.test( node.nodeValue ) ) {
-					
+					count = 0;
 					html = node.nodeValue;
 					
 					while( pattern.test( html ) ) {
@@ -40,6 +40,13 @@
 								return cache[ $1 ] = request.responseText;
 							}
 						});
+			
+						count++;
+						
+						if( count > 1e4 ) {
+							html = '<b>Include Error:</b> Circular Reference';
+							break;
+						}
 					}
 					
 					node.nextSibling
@@ -55,7 +62,6 @@
 	pattern,
 	path,
 	suffix,
-	doc = document,
 	cache = {},
 	html,
 	all,
@@ -63,7 +69,8 @@
 	node,
 	childNodes,
 	request,
-	i, j;
+	i, j,
+	count;
 	
 	return includes;
 }));
