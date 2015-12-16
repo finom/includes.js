@@ -60,5 +60,24 @@ module.exports = function(grunt) {
 }; 
 ```
 
+includes.js is general-purpose tool. For example you can use [gulp-file-include](https://www.npmjs.com/package/gulp-file-include) as well.
+**includes config**
+```js
+includes({
+	pattern: '@@include("FILE_NAME")'
+});
+```
+
+**gulp config**
+```js
+gulp.task('html', () => {
+	let fileinclude = require('gulp-file-include');
+
+	return gulp.src('index.html')
+		.pipe(fileinclude())
+		.pipe(gulp.dest('dist'));
+});
+```
+
 
 **Licensed under WTFPL**
