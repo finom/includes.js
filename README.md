@@ -60,7 +60,7 @@ module.exports = function(grunt) {
 }; 
 ```
 
-**includes.js** is universal tool. For example you can use it with Gulp, using [gulp-file-include](https://www.npmjs.com/package/gulp-file-include).
+**includes.js** is universal tool. You can use it with Gulp, using [gulp-file-include](https://www.npmjs.com/package/gulp-file-include).
 
 **includes config**
 
