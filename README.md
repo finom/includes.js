@@ -90,6 +90,8 @@ Another example: using [gulp-htmlprocessor](https://www.npmjs.com/package/gulp-h
 ```js
 includes({
 	pattern: '<!-- build:include FILE_NAME -->'
+	// you need to split "build" word for html processor if you use this script on the same HTML page
+	// pattern: '<!-- bui'+'ld:include FILE_NAME -->'
 });
 ```
 
