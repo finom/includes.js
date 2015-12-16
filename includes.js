@@ -12,11 +12,10 @@
 			path = o.path || '';
 			suffix = o.suffix || '';
 
-			pattern = typeof pattern == 'string' ? new RegExp(pattern.replace(/\s+/, '\\s+')
+			pattern = typeof pattern == 'string' ? new RegExp(pattern.replace(/\s+/g, '\\s+')
 				.replace(/\(/g, '\\(')
 				.replace(/\)/g, '\\)')
 				.replace('FILE_NAME', '(\\S+)')) : pattern;
-			window.pattern = pattern;
 
 			all = document.querySelectorAll('*');
 			for (i = 0; i < all.length; i++) {
@@ -25,13 +24,14 @@
 				childNodes = allItem.childNodes;
 				for (j = 0; j < childNodes.length; j++) {
 					node = childNodes[j];
+					nodeType = node.nodeType;
+					nodeValue = nodeType == 8 ? '<!--' + node.nodeValue + '-->' : node.nodeValue;
 
-					if (node.nodeType === 3 && pattern.test(node.nodeValue)) {
+					if ((nodeType == 3 || nodeType == 8) && pattern.test(nodeValue)) {
 						count = 0;
-						html = node.nodeValue;
 
-						while (pattern.test(html)) {
-							html = html.replace(pattern, function($0, $1) {
+						while (pattern.test(nodeValue)) {
+							nodeValue = nodeValue.replace(pattern, function($0, $1) {
 								if (cache[$1]) {
 									return cache[$1];
 								} else {
@@ -44,13 +44,17 @@
 
 							count++;
 
-							if (count > 1e4) {
-								html = '<b>Include Error:</b> Circular Reference';
+							if (count > 1e3) {
+								nodeValue = '<b>Include Error:</b> Circular Reference';
 								break;
 							}
 						}
 
-						node.nextSibling ? node.nextSibling.insertAdjacentHTML('beforebegin', html) : node.parentNode.insertAdjacentHTML('beforeend', html);
+						if(node.nextElementSibling) {
+							node.nextElementSibling.insertAdjacentHTML('beforebegin', nodeValue);
+						} else {
+							node.parentNode.insertAdjacentHTML('beforeend', nodeValue);
+						}
 
 						allItem.removeChild(node);
 						j--;
@@ -62,14 +66,15 @@
 		path,
 		suffix,
 		cache = {},
-		html,
 		all,
 		allItem,
 		node,
 		childNodes,
 		request,
 		i, j,
-		count;
+		count,
+		nodeType,
+		nodeValue;
 
 	return includes;
 }));
