@@ -39,8 +39,8 @@ module.exports = function(grunt) {
 		includes: {
 			foo:{
 				files: [{
-					src: ['index.tmpl.html'], // Source files
-					dest: '_index.html', // Destination directory
+					src: ['index.tmpl.html'],
+					dest: '_index.html',
 					flatten: true,
 					cwd: '.'
 				}],
@@ -53,10 +53,8 @@ module.exports = function(grunt) {
 		}
 	});
 
-	// Load the plugin that provides the "uglify" task.
 	grunt.loadNpmTasks('grunt-includes');
 
-	// Default task(s).
 	grunt.registerTask('default', ['includes']);
 
 }; 
