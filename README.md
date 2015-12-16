@@ -76,11 +76,34 @@ includes({
 gulp.task('html', () => {
 	let fileinclude = require('gulp-file-include');
 
-	return gulp.src('index.html')
+	return gulp.src('**/*.html')
 		.pipe(fileinclude())
 		.pipe(gulp.dest('dist'));
 });
 ```
+
+Another example: using [gulp-htmlprocessor](https://www.npmjs.com/package/gulp-htmlprocessor).
+
+**includes config**
+
+
+```js
+includes({
+	pattern: '<!-- build:include FILE_NAME -->'
+});
+```
+
+**gulp config**
+
+gulp.task('html', () => {
+	let htmlprocessor = require('gulp-htmlprocessor');
+
+	return gulp.src(['**/*.html'])
+		.pipe(htmlprocessor({
+			recursive: true
+		}))
+		.pipe(gulp.dest('dist'));
+});
 
 
 **Licensed under WTFPL**
