@@ -95,6 +95,7 @@ includes({
 
 **gulp config**
 
+```js
 gulp.task('html', () => {
 	let htmlprocessor = require('gulp-htmlprocessor');
 
@@ -104,6 +105,7 @@ gulp.task('html', () => {
 		}))
 		.pipe(gulp.dest('dist'));
 });
+```
 
 
 **Licensed under WTFPL**
